@@ -5,3 +5,8 @@
 body {
   background-color: #f8eded;
 }
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}

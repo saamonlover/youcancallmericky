@@ -1,6 +1,3 @@
-'use client'
-
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 const Card = ({ color, onClick, handleClick }) => (
@@ -20,16 +17,12 @@ const Card = ({ color, onClick, handleClick }) => (
   ></motion.div>
 )
 
-const Cards = () => {
+const Cards = ({ selected, setSelected }) => {
   const colors = ['#FF8225', '#B43F3F', '#173B45']
-  const [selected, setSelected] = useState(null)
 
   return (
     <div className='mt-8 w-full'>
-      <motion.div
-        layout
-        transition={{ layout: { duration: 1, type: 'spring' } }}
-      >
+      <motion.div layout transition={{ duration: 10 }}>
         {!selected ? (
           <div className='flex justify-center gap-4'>
             {colors.map((color, index) => (
@@ -42,8 +35,19 @@ const Cards = () => {
           </div>
         ) : selected !== '#B43F3F' ? (
           <motion.div
-            className='h-64 rounded-lg mx-auto'
-            style={{ backgroundColor: selected, width: '25rem' }}
+            drag
+            dragConstraints={{
+              top: -5,
+              left: -5,
+              right: 5,
+              bottom: 5,
+            }}
+            className='rounded-lg mx-auto'
+            style={{
+              backgroundColor: selected,
+              width: '35rem',
+              height: '20rem',
+            }}
             layoutId={`card-${selected}`}
           ></motion.div>
         ) : null}
